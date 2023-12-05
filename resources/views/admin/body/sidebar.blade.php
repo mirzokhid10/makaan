@@ -72,7 +72,7 @@
         </div>
         <div class="account-info-name">Monica G.</div>
         <a href="{{route('admin.logout')}}" class="account-info-more">
-            Action
+            Actionn
         </a>
     </div>
 </div>
