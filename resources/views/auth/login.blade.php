@@ -1,47 +1,75 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <meta charset="utf-8">
+    <title>Makaan - Real Estate</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="login" :value="__('Email/Name/Phone')" />
-            <x-text-input id="email" class="block mt-1 w-full"
-            type="text" name="login" :value="old('login')"
-            required autofocus autocomplete="username" />
-        </div>
+    <!-- Favicon -->
+    <link href="{{ asset('frontend/assets/img/favicon.ico') }}" rel="icon">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                type="password"
-                name="password"
-                required autocomplete="current-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('frontend/assets/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('frontend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <!-- Template Stylesheet -->
+    <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row" style="height: 100vh">
+				<div class="col-md-6 mx-auto d-flex justify-content-center align-items-center">
+						<div class="wow fadeInUp" data-wow-delay="0.5s">
+								<form method="POST" action="{{route('login')}}">
+									@csrf
+										<div class="row g-3">
+											<div class="form-group d-flex flex-column">
+                                                <label class="my-1">Email/Name/Phone</label>
+												<input type="text" style="height: calc(3.5rem + 2px); padding: 1rem .75rem;" class="form-control" name="login" id="login" required="">
+											</div>
+											<div class="form-group d-flex flex-column">
+                                                <label class="my-1">Password</label>
+                                                <input type="password" style="height: calc(3.5rem + 2px); padding: 1rem .75rem;" class="form-control" name="password" id="password" required="">
+											</div>
+											<div class="form-group message-btn">
+												<button type="submit" class="btn btn-primary w-100 py-3">Sign in</button>
+											</div>
+											<div class="othre-text">
+												<p>Have not any account? <a href="{{route('register')}}">Register Now</a></p>
+											</div>
+										</div>
+								</form>
+						</div>
+				</div>
+		</div>
+	</div>
+	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="{{ asset('frontend/assets/lib/wow/wow.min.js') }}"></script>
+	<script src="{{ asset('frontend/assets/lib/easing/easing.min.js') }}"></script>
+	<script src="{{ asset('frontend/assets/lib/waypoints/waypoints.min.js') }}"></script>
+	<script src="{{ asset('frontend/assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+	<!-- Template Javascript -->
+	<script src="{{ asset('frontend/assets/js/main.js') }}"></script>
+</body>
+
+</html>

@@ -1,417 +1,350 @@
 @extends('admin.admin_dashboard')
 
 @section('admin')
-    <div class="app-content-actions">
-        <input class="search-bar" placeholder="Search..." type="text">
-        <div class="app-content-actions-wrapper">
-            <div class="filter-button-wrapper">
-                <button class="action-button filter jsFilter"><span>Filter</span><svg xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
-                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                    </svg></button>
-                <div class="filter-menu">
-                    <label>Category</label>
-                    <select>
-                        <option>All Categories</option>
-                        <option>Furniture</option>
-                        <option>Decoration</option>
-                        <option>Kitchen</option>
-                        <option>Bathroom</option>
-                    </select>
-                    <label>Status</label>
-                    <select>
-                        <option>All Status</option>
-                        <option>Active</option>
-                        <option>Disabled</option>
-                    </select>
-                    <div class="filter-menu-buttons">
-                        <button class="filter-button reset">
-                            Reset
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <div class="d-flex align-items-end flex-wrap">
+                        <div class="me-md-3 me-xl-5">
+                            <h2>Welcome back,</h2>
+                            <p class="mb-md-0">Your analytics dashboard template.</p>
+                        </div>
+                        <div class="d-flex">
+                            <i class="mdi mdi-home text-muted hover-cursor"></i>
+                            <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
+                            <p class="text-primary mb-0 hover-cursor">Analytics</p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end flex-wrap">
+                        <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block ">
+                            <i class="mdi mdi-download text-muted"></i>
                         </button>
-                        <button class="filter-button apply">
-                            Apply
+                        <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
+                            <i class="mdi mdi-clock-outline text-muted"></i>
                         </button>
+                        <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
+                            <i class="mdi mdi-plus text-muted"></i>
+                        </button>
+                        <button class="btn btn-primary mt-2 mt-xl-0">Generate report</button>
                     </div>
                 </div>
             </div>
-            <button class="action-button list active" title="List View">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-list">
-                    <line x1="8" y1="6" x2="21" y2="6" />
-                    <line x1="8" y1="12" x2="21" y2="12" />
-                    <line x1="8" y1="18" x2="21" y2="18" />
-                    <line x1="3" y1="6" x2="3.01" y2="6" />
-                    <line x1="3" y1="12" x2="3.01" y2="12" />
-                    <line x1="3" y1="18" x2="3.01" y2="18" />
-                </svg>
-            </button>
-            <button class="action-button grid" title="Grid View">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-grid">
-                    <rect x="3" y="3" width="7" height="7" />
-                    <rect x="14" y="3" width="7" height="7" />
-                    <rect x="14" y="14" width="7" height="7" />
-                    <rect x="3" y="14" width="7" height="7" />
-                </svg>
-            </button>
         </div>
-    </div>
-    <div class="products-area-wrapper tableView">
-        <div class="products-header">
-            <div class="product-cell image">
-                Items
-                <button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button>
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body dashboard-tabs p-0">
+                        <ul class="nav nav-tabs px-4" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="overview-tab" data-bs-toggle="tab" href="#overview"
+                                    role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="sales-tab" data-bs-toggle="tab" href="#sales" role="tab"
+                                    aria-controls="sales" aria-selected="false">Sales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="purchases-tab" data-bs-toggle="tab" href="#purchases" role="tab"
+                                    aria-controls="purchases" aria-selected="false">Purchases</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-0 px-0">
+                            <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                aria-labelledby="overview-tab">
+                                <div class="d-flex flex-wrap justify-content-xl-between">
+                                    <div
+                                        class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Start date</small>
+                                            <div class="dropdown">
+                                                <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium"
+                                                    href="#" role="button" id="dropdownMenuLinkA"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                    <a class="dropdown-item" href="#">12 Aug
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">22 Sep
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">21 Oct
+                                                        2018</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Revenue</small>
+                                            <h5 class="me-2 mb-0">$577545</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Total views</small>
+                                            <h5 class="me-2 mb-0">9833550</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-download me-3 icon-lg text-warning"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Downloads</small>
+                                            <h5 class="me-2 mb-0">2233783</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-flag me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Flagged</small>
+                                            <h5 class="me-2 mb-0">3497843</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+                                <div class="d-flex flex-wrap justify-content-xl-between">
+                                    <div
+                                        class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Start date</small>
+                                            <div class="dropdown">
+                                                <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium"
+                                                    href="#" role="button" id="dropdownMenuLinkA"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                    <a class="dropdown-item" href="#">12 Aug
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">22 Sep
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">21 Oct
+                                                        2018</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-download me-3 icon-lg text-warning"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Downloads</small>
+                                            <h5 class="me-2 mb-0">2233783</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Total views</small>
+                                            <h5 class="me-2 mb-0">9833550</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Revenue</small>
+                                            <h5 class="me-2 mb-0">$577545</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-flag me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Flagged</small>
+                                            <h5 class="me-2 mb-0">3497843</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
+                                <div class="d-flex flex-wrap justify-content-xl-between">
+                                    <div
+                                        class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Start date</small>
+                                            <div class="dropdown">
+                                                <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium"
+                                                    href="#" role="button" id="dropdownMenuLinkA"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                    <a class="dropdown-item" href="#">12 Aug
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">22 Sep
+                                                        2018</a>
+                                                    <a class="dropdown-item" href="#">21 Oct
+                                                        2018</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Revenue</small>
+                                            <h5 class="me-2 mb-0">$577545</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Total views</small>
+                                            <h5 class="me-2 mb-0">9833550</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-download me-3 icon-lg text-warning"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Downloads</small>
+                                            <h5 class="me-2 mb-0">2233783</h5>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-flag me-3 icon-lg text-danger"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted">Flagged</small>
+                                            <h5 class="me-2 mb-0">3497843</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="product-cell category">Category<button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button></div>
-            <div class="product-cell status-cell">Status<button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button></div>
-            <div class="product-cell sales">Sales<button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button></div>
-            <div class="product-cell stock">Stock<button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button></div>
-            <div class="product-cell price">Price<button class="sort-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512">
-                        <path fill="currentColor"
-                            d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z" />
-                    </svg>
-                </button></div>
         </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                    alt="product">
-                <span>Ocean</span>
+        <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">Cash deposits</p>
+                        <p class="mb-4">To start a blog, think of a topic about and first brainstorm
+                            party is ways to write details</p>
+                        <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3">
+                        </div>
+                        <canvas id="cash-deposits-chart"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
+            <div class="col-md-5 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">Total sales</p>
+                        <h1>$ 28835</h1>
+                        <h4>Gross sales over the years</h4>
+                        <p class="text-muted">Today, many people rely on computers to do homework, work,
+                            and create or store useful information. Therefore, it is important </p>
+                        <div id="total-sales-chart-legend"></div>
+                    </div>
+                    <canvas id="total-sales-chart"></canvas>
+                </div>
             </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>11</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>36</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$560</div>
         </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8a2l0Y2hlbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Lou</span>
+        <div class="row">
+            <div class="col-md-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">Recent Purchases</p>
+                        <div class="table-responsive">
+                            <table id="recent-purchases-listing" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Status report</th>
+                                        <th>Office</th>
+                                        <th>Price</th>
+                                        <th>Date</th>
+                                        <th>Gross amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jeremy Ortega</td>
+                                        <td>Levelled up</td>
+                                        <td>Catalinaborough</td>
+                                        <td>$790</td>
+                                        <td>06 Jan 2018</td>
+                                        <td>$2274253</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alvin Fisher</td>
+                                        <td>Ui design completed</td>
+                                        <td>East Mayra</td>
+                                        <td>$23230</td>
+                                        <td>18 Jul 2018</td>
+                                        <td>$83127</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Emily Cunningham</td>
+                                        <td>support</td>
+                                        <td>Makennaton</td>
+                                        <td>$939</td>
+                                        <td>16 Jul 2018</td>
+                                        <td>$29177</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Minnie Farmer</td>
+                                        <td>support</td>
+                                        <td>Agustinaborough</td>
+                                        <td>$30</td>
+                                        <td>30 Apr 2018</td>
+                                        <td>$44617</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Betty Hunt</td>
+                                        <td>Ui design not completed</td>
+                                        <td>Lake Sandrafort</td>
+                                        <td>$571</td>
+                                        <td>25 Jun 2018</td>
+                                        <td>$78952</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Myrtie Lambert</td>
+                                        <td>Ui design completed</td>
+                                        <td>Cassinbury</td>
+                                        <td>$36</td>
+                                        <td>05 Nov 2018</td>
+                                        <td>$36422</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob Kennedy</td>
+                                        <td>New project</td>
+                                        <td>Cletaborough</td>
+                                        <td>$314</td>
+                                        <td>12 Jul 2018</td>
+                                        <td>$34167</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ernest Wade</td>
+                                        <td>Levelled up</td>
+                                        <td>West Fidelmouth</td>
+                                        <td>$484</td>
+                                        <td>08 Sep 2018</td>
+                                        <td>$50862</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Kitchen</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>6</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$710</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Yellow</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>61</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>56</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$360</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmVkcm9vbXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Dreamy</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Bedroom</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>41</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>66</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$260</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Boheme</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Sky</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Bathroom</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>22</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>44</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$160</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Midnight</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>23</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>45</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$340</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Boheme</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1511389026070-a14ae610a1be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Palm</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>24</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$60</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Forest</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Living Room</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>41</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>16</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$270</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Sand</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Living Room</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status disabled">Disabled</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>52</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>16</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$230</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODd8fGludGVyaW9yfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Autumn</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Decoration</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>21</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>46</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$252</div>
-        </div>
-        <div class="products-row">
-            <button class="cell-more-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" />
-                </svg>
-            </button>
-            <div class="product-cell image">
-                <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aW50ZXJpb3J8ZW58MHwwfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                    alt="product">
-                <span>Boheme</span>
-            </div>
-            <div class="product-cell category"><span class="cell-label">Category:</span>Furniture</div>
-            <div class="product-cell status-cell">
-                <span class="cell-label">Status:</span>
-                <span class="status active">Active</span>
-            </div>
-            <div class="product-cell sales"><span class="cell-label">Sales:</span>32</div>
-            <div class="product-cell stock"><span class="cell-label">Stock:</span>40</div>
-            <div class="product-cell price"><span class="cell-label">Price:</span>$350</div>
         </div>
     </div>
 @endsection

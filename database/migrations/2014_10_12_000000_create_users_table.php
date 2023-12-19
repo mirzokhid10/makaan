@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->text('description')->nullable();
             $table->enum('role', ['admin', 'agent', 'user'])->nullable('user');
             $table->enum('status', ['active', 'inactive'])->nullable('active');
             $table->rememberToken();

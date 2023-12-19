@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,6 +16,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
         DB::table('users')->insert([
             // Admin
             [
@@ -26,6 +28,9 @@ class UsersTableSeeder extends Seeder
                 'phone' => random_int(100000000, 999999999),
                 'role'=> 'admin',
                 'status'=> 'active',
+                'description' => $faker->paragraph,
+                'city'=>'Tashkent',
+                'state' => 'Chilanzar'
             ],
             // Agent
             [
@@ -37,6 +42,9 @@ class UsersTableSeeder extends Seeder
                 'phone' => random_int(100000000, 999999999),
                 'role'=> 'agent',
                 'status'=> 'active',
+                'description' => $faker->paragraph,
+                'city'=>'Tashkent',
+                'state' => 'Chilanzar'
             ],
             // User
             [
@@ -48,6 +56,9 @@ class UsersTableSeeder extends Seeder
                 'phone' => random_int(100000000, 999999999),
                 'role'=> 'user',
                 'status'=> 'active',
+                'description' => $faker->paragraph,
+                'city'=>'Tashkent',
+                'state' => 'Chilanzar'
             ],
         ]);
     }
