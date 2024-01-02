@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AgentController;
+use App\Http\Controllers\Backend\AgentController;
+use App\Http\Controllers\Backend\PropertyController;
+use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -59,16 +62,47 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
 });  // End Admin group middleware finish
 
-// Agent group middleware start
-Route::middleware('auth', 'role:agent')->group(function () {
 
-    // Agent dashboard
-    Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
-}); // End Agent group middleware finish
+
+// Pages
+Route::get('index', [PageController::class, 'index'])
+->name('index');
+Route::get('about', [PageController::class, 'about'])
+->name('about');
+Route::get('propertylist', [PageController::class, 'propertylist'])
+->name('propertylist');
+Route::get('contact', [PageController::class, 'contact'])
+->name('contact');
 
 // Admin login
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])
+->name('admin.login');
 
 // Admin registration
-Route::get('/admin/registration', [AdminController::class, 'AdminRegistration'])->name('admin.registration');
+Route::get('/admin/registration', [AdminController::class, 'AdminRegistration'])
+->name('admin.registration');
 
+/// Admin Group Middleware
+Route::middleware(['auth','role:admin'])->group(function(){
+
+    // Property Type All Route
+    Route::controller(PropertyTypeController::class)->group(function(){
+        Route::get('/all/type', 'AllType')->name('all.type');
+        Route::get('/add/type', 'AddType')->name('add.type');
+        Route::post('/store/type', 'StoreType')->name('store.type');
+        Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
+        Route::post('/update/type', 'UpdateType')->name('update.type');
+        Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
+    });
+
+    // Add Properties By Admin All Routes
+    Route::controller(PropertyController::class)->group(function(){
+        Route::get('/all/property', 'AllProperty')->name('all.property');
+        Route::get('/add/property', 'AddProperty')->name('add.property');
+        Route::post('/store/property', 'StoreProperty')->name('store.property');
+        // Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
+        // Route::post('/update/property', 'UpdateProperty')->name('update.property');
+        // Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+    });
+
+}); // End Group Admin Middleware
