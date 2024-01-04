@@ -6,16 +6,19 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Add Property</h4>
-                    <form method="post" action="{{ route('store.property') }}" id="myForm"
+                    <form method="post" action="{{ route('update.property') }}" id="myForm"
                     enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="id" value="{{ $properties->id }}">
                         <p class="card-description">Property Info</p>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Property Name</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="property_name" class="form-control @error('property_name') is-invalid @enderror ">
+                                        <input type="text" name="property_name" class="form-control
+                                        @error('property_name') is-invalid @enderror "
+                                        value="{{$properties->property_name}}">
                                         @error('property_name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -28,9 +31,10 @@
                                     <div class="col-sm-12">
                                         <select name="ptype_id" class="form-select" style="padding: 10px; border: 1px solid #f3f3f3;"
                                         id="exampleFormControlSelect1">
-                                            <option selected="" disabled="">Select Property Type</option>
+                                            <option selected="" disabled=""
+																						>Select Property Type</option>
                                             @foreach($propertytype as $ptype)
-                                            <option value="{{ $ptype->id }}">{{ $ptype->type_name }}</option>
+                                            <option value="{{$properties->ptype}}">{{ $ptype->type_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('property_slug')
@@ -43,7 +47,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Property Slug</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="property_slug" class="form-control @error('property_slug') is-invalid @enderror ">
+                                        <input type="text" name="property_slug" class="form-control @error('property_slug') is-invalid @enderror"
+                                        value="{{$properties->property_slug}} ">
                                         @error('property_slug')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -58,9 +63,9 @@
                                     <div class="col-sm-12">
                                         <select name="property_status" class="form-select" style="padding: 10px; border: 1px solid #f3f3f3;"
                                             id="exampleFormControlSelect1">
-                                            <option selected="" disabled="">Select Status</option>
-                                            <option value="Rent">For Rent</option>
-                                            <option value="Buy">For Sell</option>
+                                            <option selected="" disabled="" value="{{$properties->property_status}}">Select Status</option>
+                                            <option value="rent" >For Rent</option>
+                                            <option value="buy" >For Buy</option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,7 +74,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Lowest Price</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="lowest_price" class="form-control">
+                                        <input type="text" name="lowest_price" class="form-control"
+                                        value="{{$properties->lowest_price}}">
                                     </div>
 
                                 </div>
@@ -78,7 +84,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Highest Price</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="max_price" class="form-control">
+                                        <input type="text" name="max_price" class="form-control"
+                                        value="{{$properties->max_price}}">
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +95,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Bedrooms</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="bedrooms" class="form-control">
+                                        <input type="text" name="bedrooms" class="form-control"
+                                        value="{{$properties->bedrooms}}">
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +104,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Bathrooms</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="bathrooms" class="form-control">
+                                        <input type="text" name="bathrooms" class="form-control"
+                                        value="{{$properties->bathrooms}}">
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +113,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Garage</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="garage" class="form-control">
+                                        <input type="text" name="garage" class="form-control"
+                                        value="{{$properties->garage}}">
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +122,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Garage Size</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="garage_size" class="form-control">
+                                        <input type="text" name="garage_size" class="form-control"
+                                        value="{{$properties->garage_size}}">
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +133,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Proprty Size</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="proprty_size" class="form-control">
+                                        <input type="text" name="proprty_size" class="form-control"
+                                        value="{{$properties->proprty_size}}">
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +142,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Address</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="address" class="form-control">
+                                        <input type="text" name="address" class="form-control"
+                                        value="{{$properties->address}}">
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +151,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">City</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="city" class="form-control">
+                                        <input type="text" name="city" class="form-control"
+                                        value="{{$properties->city}}">
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +160,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">State</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="state" class="form-control">
+                                        <input type="text" name="state" class="form-control"
+                                        value="{{$properties->state}}">
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +171,8 @@
                                 <div class="form-group ">
                                     <label class="col-sm-3 col-form-label">Neighborhood</label>
                                     <div class="col-sm-12">
-                                        <input type="text" name="neighborhood" class="form-control" />
+                                        <input type="text" name="neighborhood" class="form-control"
+                                        value="{{$properties->neighborhood}}"/>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +181,8 @@
                                     <label class="col-sm-3 col-form-label">Agent</label>
                                     <div class="col-sm-12">
                                         <select name="agent" class="form-select" style="padding: 10px; border: 1px solid #f3f3f3;"
-                                            id="exampleFormControlSelect1">
+                                            id="exampleFormControlSelect1"
+                                            value="{{$properties->agent}}">
                                             <option selected="" disabled="">Select Status</option>
                                         </select>
                                     </div>
@@ -177,7 +194,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Short Description</label>
                                     <div class="col-sm-12">
-                                        <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea" rows="3"></textarea>
+                                        <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea" rows="3"
+                                        >{!! $properties->short_descp !!}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -185,34 +203,109 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Long Description</label>
                                     <div class="col-sm-12">
-                                        <textarea name="long_descp" class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
+                                        <textarea name="long_descp" class="form-control" id="tinymceExample" rows="10"
+                                        >{!! $properties->long_descp !!}</textarea>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Main Image</label>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)" >
-                                    </div>
-                                    <div class="row" id="mainThmb"> </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Additional Images</label>
-                                    <div class="col-sm-12">
-                                        <input type="file" name="multi_img[]" class="form-control" id="multiImg" multiple="" >
-                                    </div>
-                                    <div class="row" id="preview_img"> </div>
                                 </div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Changes </button>
                     </form>
                 </div>
+                {{-- Edit single image section --}}
+                <div class="card-body">
+                    <h4 class="card-title">Edit Main Image</h4>
+                    <form method="post" action="{{ route('update.property.thambnail') }}" id="myForm" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="propthamb_id" value="{{ $properties->id }}">
+                        <input type="hidden" name="old_img" value="{{ $properties->property_thambnail }}" >
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sl</th>
+                                                <th>Current Image</th>
+                                                <th>New Image</th>
+                                                <th>Change Image </th>
+                                                <th>Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ 1 }}</td>
+                                                <td class="py-1">
+                                                    <img src="{{ asset($properties->property_thambnail) }}" style="width:60px; height:50px;">
+                                                </td>
+                                                <td>
+                                                    <img src="" id="mainThmb">
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)" >
+                                                </td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-primary px-4" value="Update Image" ></button>
+                                                    <a href="{{ route('property.thambnail.delete',  $properties->id) }}" class="btn btn-danger" id="delete">Delete </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Save Changes </button>
+                    </form>
+                </div>
+                {{-- Edit single image section --}}
+
+                {{-- Edit multi image section --}}
+                <div class="card-body">
+                    <h4 class="card-title">Edit Additional Images</h4>
+                    <form method="post" action="{{ route('update.property.multiimage') }}" id="myForm" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sl</th>
+                                                <th>Current Image</th>
+                                                <th>New Image</th>
+                                                <th>Change Image </th>
+                                                <th>Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($multiImage as $key => $img)
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+                                                <td class="py-1">
+                                                    <img src="{{ asset($img->photo_name) }}" alt="image"  style="width:60px; height:50px;">
+                                                </td>
+                                                <td>
+                                                    <img src="" id="multi_img">
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control" name="multi_img[{{ $img->id }}]">
+                                                </td>
+                                                <td>
+                                                    <input type="submit" class="btn btn-primary px-4" value="Update Image" >
+                                                    <a href="{{ route('property.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete">Delete </a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-4">Save Changes </button>
+                    </form>
+                </div>
+                {{-- Edit multi image section --}}
             </div>
         </div>
     </div>
@@ -222,14 +315,14 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e){
-                    $('#mainThmb').attr('src',e.target.result).width(80).height(80);
+                    $('#mainThmb').attr('src',e.target.result).width(60).height(50);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
     </script>
-    <script>
 
+    <script>
     $(document).ready(function(){
     $('#multiImg').on('change', function(){ //on file input change
         if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
@@ -241,8 +334,8 @@
                     var fRead = new FileReader(); //new filereader
                     fRead.onload = (function(file){ //trigger function on successful read
                     return function(e) {
-                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(100)
-                    .height(80); //create image element
+                        var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(60)
+                    .height(50); //create image element
                         $('#preview_img').append(img); //append image to output element
                     };
                     })(file);
@@ -257,4 +350,5 @@
     });
 
     </script>
+
 @endsection

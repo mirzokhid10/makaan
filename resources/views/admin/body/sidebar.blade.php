@@ -7,17 +7,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
+            <a class="nav-link" href="{{ route('all.type') }}">
                 <i class="mdi mdi-circle-outline menu-icon"></i>
                 <span class="menu-title">Property Type</span>
-                <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('all.type') }}">All Type</a></li>
-                </ul>
-            </div>
         </li>
         {{-- <li class="nav-item">
             <a class="nav-link" href="">

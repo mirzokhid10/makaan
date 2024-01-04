@@ -100,9 +100,13 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::get('/all/property', 'AllProperty')->name('all.property');
         Route::get('/add/property', 'AddProperty')->name('add.property');
         Route::post('/store/property', 'StoreProperty')->name('store.property');
-        // Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
-        // Route::post('/update/property', 'UpdateProperty')->name('update.property');
-        // Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+        Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
+        Route::post('/update/property', 'UpdateProperty')->name('update.property');
+        Route::post('/update/property/thambnail', 'UpdatePropertyThambnail')->name('update.property.thambnail');
+        Route::get('/property/thambnail/delete/{id}', 'PropertyThambnailDelete')->name('property.thambnail.delete');
+        Route::post('/update/property/multiimage', 'UpdatePropertyMultiimage')->name('update.property.multiimage');
+        Route::get('/property/multiimg/delete/{id}', 'PropertyMultiImageDelete')->name('property.multiimg.delete');
+        Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
     });
 
 }); // End Group Admin Middleware

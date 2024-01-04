@@ -14,6 +14,7 @@
                                 <tr>
                                     <th>Admin</th>
                                     <th>Property Name</th>
+                                    <th>Property Type</th>
                                     <th>Property Status</th>
                                     <th>City</th>
                                     <th>Status</th>
@@ -35,6 +36,7 @@
                                                 alt="profile" />
                                         </td>
                                         <td>{{ $property->property_name }}</td>
+                                        <td>{{ $property['type']['type_name'] }}</td>
                                         <td>{{ $property->property_status }}</td>
                                         <td>{{ $property->city }}</td>
                                         <td>{{ $property->status }}</td>
