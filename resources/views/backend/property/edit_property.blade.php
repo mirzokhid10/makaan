@@ -31,10 +31,12 @@
                                     <div class="col-sm-12">
                                         <select name="ptype_id" class="form-select" style="padding: 10px; border: 1px solid #f3f3f3;"
                                         id="exampleFormControlSelect1">
-                                            <option selected="" disabled=""
-																						>Select Property Type</option>
+                                            <option selected="" disabled="">Select Property Type</option>
                                             @foreach($propertytype as $ptype)
-                                            <option value="{{$properties->ptype}}">{{ $ptype->type_name }}</option>
+                                            <option value="{{$ptype->id}}"
+                                            {{ $ptype->id == $properties->ptype_id ? 'selected' : '' }}>
+                                                {{ $ptype->type_name }}
+                                            </option>
                                             @endforeach
                                         </select>
                                         @error('property_slug')
@@ -64,8 +66,8 @@
                                         <select name="property_status" class="form-select" style="padding: 10px; border: 1px solid #f3f3f3;"
                                             id="exampleFormControlSelect1">
                                             <option selected="" disabled="" value="{{$properties->property_status}}">Select Status</option>
-                                            <option value="rent" >For Rent</option>
-                                            <option value="buy" >For Buy</option>
+                                            <option value="Rent" {{ $properties->property_status == 'Rent' ? 'selected' : '' }} >For Rent</option>
+                                            <option value="Buy" {{ $properties->property_status == 'Buy' ? 'selected' : '' }}>For Buy</option>
                                         </select>
                                     </div>
                                 </div>
@@ -215,10 +217,10 @@
                 {{-- Edit single image section --}}
                 <div class="card-body">
                     <h4 class="card-title">Edit Main Image</h4>
-                    <form method="post" action="{{ route('update.property.thambnail') }}" id="myForm" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('update.property.property_mainimage') }}" id="myForm" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="propthamb_id" value="{{ $properties->id }}">
-                        <input type="hidden" name="old_img" value="{{ $properties->property_thambnail }}" >
+                        <input type="hidden" name="mainImageId" value="{{ $properties->id }}">
+                        <input type="hidden" name="oldMainImage" value="{{ $properties->property_mainimage }}" >
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -236,17 +238,17 @@
                                             <tr>
                                                 <td>{{ 1 }}</td>
                                                 <td class="py-1">
-                                                    <img src="{{ asset($properties->property_thambnail) }}" style="width:60px; height:50px;">
+                                                    <img src="{{ asset($properties->property_mainimage) }}" style="width:60px; height:50px;">
                                                 </td>
                                                 <td>
-                                                    <img src="" id="mainThmb">
+                                                    <img src="<?= !empty($imageSrc) ? $imageSrc : ''; ?>" id="mainThmb" alt="<?= !empty($imageSrc) ? '' : 'Not uploaded image yet'; ?>">
                                                 </td>
                                                 <td>
-                                                    <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)" >
+                                                    <input type="file" name="property_mainimage" class="form-control" onChange="mainThamUrl(this)" >
                                                 </td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-primary px-4" value="Update Image" ></button>
-                                                    <a href="{{ route('property.thambnail.delete',  $properties->id) }}" class="btn btn-danger" id="delete">Delete </a>
+                                                    <button type="submit" class="btn btn-primary px-4" >Update Image</button>
+                                                    {{-- <a href="{{ route('property.property_mainimage.delete',  $properties->id) }}" class="btn btn-danger" id="delete">Delete </a> --}}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -254,8 +256,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Save Changes </button>
                     </form>
                 </div>
                 {{-- Edit single image section --}}
@@ -263,7 +263,7 @@
                 {{-- Edit multi image section --}}
                 <div class="card-body">
                     <h4 class="card-title">Edit Additional Images</h4>
-                    <form method="post" action="{{ route('update.property.multiimage') }}" id="myForm" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('update.property.additional_images') }}" id="myForm" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -279,21 +279,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($multiImage as $key => $img)
+                                            @foreach($additional_images as $key => $add_imgs)
                                             <tr>
                                                 <td>{{ $key+1 }}</td>
                                                 <td class="py-1">
-                                                    <img src="{{ asset($img->photo_name) }}" alt="image"  style="width:60px; height:50px;">
+                                                    <img src="{{ asset($add_imgs->photo_name) }}" alt="image"  style="width:60px; height:50px;">
                                                 </td>
                                                 <td>
-                                                    <img src="" id="multi_img">
+                                                    <img src="" id="additional_images">
                                                 </td>
                                                 <td>
-                                                    <input type="file" class="form-control" name="multi_img[{{ $img->id }}]">
+                                                    <input type="file" class="form-control" name="additional_images[{{ $add_imgs->id }}]">
                                                 </td>
                                                 <td>
                                                     <input type="submit" class="btn btn-primary px-4" value="Update Image" >
-                                                    <a href="{{ route('property.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete">Delete </a>
+                                                    <a href="{{ route('property.additional_images.delete',$add_imgs->id) }}" class="btn btn-danger" id="delete">Delete </a>
                                                 </td>
                                             </tr>
                                             @endforeach

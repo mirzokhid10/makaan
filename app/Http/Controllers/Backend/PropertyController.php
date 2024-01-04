@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\MultiImage;
+use App\Models\AdditionalImages;
 use App\Models\Property;
 use App\Models\PropertyType;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -28,32 +28,33 @@ class PropertyController extends Controller
         return view('backend.property.add_property', compact('propertytype'));
     } // End Method
 
-    // StoreType
+    // Store Property
     public function StoreProperty(Request $request){
 
-        if ($request->file('property_thambnail')) {
+        if ($request->file('property_mainimage')) {
             $manager = new ImageManager(new Driver());
             $str_img_name_gen = hexdec(uniqid()).'.'.$request
-            ->file('property_thambnail')->getClientOriginalExtension();
+            ->file('property_mainimage')->getClientOriginalExtension();
 
 
-            $str_img = $manager->read($request->file('property_thambnail'))
+            $str_img = $manager->read($request->file('property_mainimage'))
             ->resize(370,246)->save('upload/property/thambnail/'.$str_img_name_gen);
             $save_url = 'upload/property/thambnail/'.$str_img_name_gen;
+
         }
 
-        $pcode = IdGenerator::generate([
+        $property_code = IdGenerator::generate([
             'table' => 'properties',
             'field' => 'property_code',
             'length' => 5,
             'prefix' => 'PC'
         ]);
 
-        $property_id = Property::insertGetId([
+        $storePropertyId = Property::insertGetId([
             'ptype_id' => $request->ptype_id,
             'property_name' => $request->property_name,
             'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)),
-            'property_code' => $pcode,
+            'property_code' => $property_code,
             'property_status' => $request->property_status,
 
             'lowest_price' => $request->lowest_price,
@@ -78,11 +79,11 @@ class PropertyController extends Controller
             'hot' => $request->hot,
             'agent_id' => $request->agent_id,
             'status' => 1,
-            'property_thambnail' => $save_url,
+            'property_mainimage' => $save_url,
             'created_at' => Carbon::now(),
         ]);
 
-        $images = $request->file('multi_img');
+        $images = $request->file('additional_images');
 
         if ($images) {
             foreach($images as $imgs){
@@ -94,14 +95,13 @@ class PropertyController extends Controller
 
                 // Resize and save the current image
                 $resized_image = $current_image->resize(370, 246);
-                $resized_image->save('upload/property/multi-image/'.$name_generate);
-                $multi_imgurl = 'upload/property/multi-image/'.$name_generate;
+                $resized_image->save('upload/property/additional_images/'.$name_generate);
+                $additional_imagesurl = 'upload/property/additional_images/'.$name_generate;
 
-                MultiImage::insert([
-                    'property_id' => $property_id,
-                    'photo_name' => $multi_imgurl,
-                    'created_at' => Carbon::now(), // Assuming this field represents the creation timestamp
-                    // You may want to use 'updated_at' if this represents the last update timestamp
+                AdditionalImages::insert([
+                    'property_id' => $storePropertyId,
+                    'photo_name' => $additional_imagesurl,
+                    'created_at' => Carbon::now(),
                 ]);
             }
         }
@@ -113,25 +113,27 @@ class PropertyController extends Controller
         );
 
         return redirect()->route('all.property')->with($notification);
-    }// End Metho
+    }// End Store Property
 
-    // EditProperty
+    // Edit Property
     public function EditProperty($id){
 
-        $multiImage = MultiImage::where('property_id',$id)->get();
-
+        $editAdditionalImages = AdditionalImages::where('property_id',$id)->get();
+        $additional_images = AdditionalImages::where('property_id',$id)->get();
         $properties = Property::findOrFail($id);
         $propertytype = PropertyType::latest()->get();
-        return view('backend.property.edit_property',compact('properties', 'propertytype', 'multiImage'));
+        return view('backend.property.edit_property',
+        compact('properties', 'propertytype', 'editAdditionalImages', 'additional_images'));
 
-    }// End Method
+    }
+    // End Method
 
     // UpdateType
     public function UpdateProperty(Request $request){
 
-        $property_id = $request->id;
+        $updatePropertyId = $request->id;
 
-        Property::findOrFail($property_id)->update([
+        Property::findOrFail($updatePropertyId)->update([
             'ptype_id' => $request->ptype_id,
             'property_name' => $request->property_name,
             'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)),
@@ -170,73 +172,74 @@ class PropertyController extends Controller
         return redirect()->route('all.property')->with($notification);
     }
 
-    public function UpdatePropertyThambnail(Request $request){
+    public function UpdatePropertyMainImage(Request $request){
 
-        $propthamb_id = $request->id;
-        $oldImage = $request->old_img;
+        $updatePropertyMainImageId = $request->mainImageId;
+        $prevPropertyMainImage = $request->oldMainImage;
 
-        if ($request->file('property_thambnail')) {
+        if ($request->file('property_mainimage')) {
             $manager = new ImageManager(new Driver());
             $name_gen = hexdec(uniqid()).'.'.$request
-            ->file('property_thambnail')->getClientOriginalExtension();
+            ->file('property_mainimage')->getClientOriginalExtension();
 
 
-            $img = $manager->read($request->file('property_thambnail'))
-            ->resize(370,246)->save('upload/property/thambnail/'.$name_gen);
-            $save_url = 'upload/property/thambnail/'.$name_gen;
+            $img = $manager->read($request->file('property_mainimage'))
+            ->resize(370,246)->save('upload/property/main_image/'.$name_gen);
+            $save_url = 'upload/property/main_image/'.$name_gen;
         }
 
-        if (file_exists($oldImage)) {
-            unlink($oldImage);
+        // Prev Photo will be deleted
+        if (file_exists($prevPropertyMainImage)) {
+            unlink($prevPropertyMainImage);
         }
 
-        Property::findOrFail($propthamb_id)->update([
+        Property::findOrFail($updatePropertyMainImageId)->update([
 
-            'property_thambnail' => $save_url,
+            'property_mainimage' => $save_url,
             'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
-            'message' => 'Property Image Thambnail Updated Successfully',
+            'message' => 'Property Main Image Updated Successfully',
             'alert-type' => 'success'
         );
 
         return redirect()->back()->with($notification);
     }
 
-    public function PropertyThambnailDelete($id){
-        $mainThambnailImage = Property::findOrFail($id);
-        unlink($mainThambnailImage->property_thambnail);
+    // public function PropertyThambnailDelete($id){
+    //     $mainThambnailImage = Property::findOrFail($id);
+    //     unlink($mainThambnailImage->property_mainimage);
 
-        Property::findOrFail($id)->delete();
+    //     Property::findOrFail($id)->delete();
 
-        $notification = array(
-            'message' => 'Property Main Image Deleted Successfully',
-            'alert-type' => 'success'
-        );
+    //     $notification = array(
+    //         'message' => 'Property Main Image Deleted Successfully',
+    //         'alert-type' => 'success'
+    //     );
 
-        return redirect()->back()->with($notification);
-    }
+    //     return redirect()->back()->with($notification);
+    // }
 
-    public function UpdatePropertyMultiimage(Request $request){
-        $images = $request->multi_img;
+    public function UpdatePropertyAdditionalImages(Request $request){
+        $updPropAdditionalImages = $request->additional_images;
 
-        foreach($images as $id => $image){
+        foreach($updPropAdditionalImages as $id => $updPropAddimg){
 
-            $imgDel = MultiImage::findOrFail($id);
-            unlink($imgDel->photo_name);
+            $updPropAdditionalImagesDel = AdditionalImages::findOrFail($id);
+            unlink($updPropAdditionalImagesDel->photo_name);
 
-            if ($request->file('multiimage')) {
+            if ($request->file('additional_images')) {
                 $manager = new ImageManager(new Driver());
-                $multiimgname_gen = hexdec(uniqid())
-                .'.'.$request->file('multiimage')->getClientOriginalExtension();
+                $additionalImagesNameGen = hexdec(uniqid())
+                .'.'.$updPropAddimg->getClientOriginalExtension();
 
-                $image =  $manager->read($request->file('multiimage'))
-                ->resize(770,520)->save('upload/property/multi-image/'.$multiimgname_gen);
+                $updAddImgCrt =  $manager->read($updPropAddimg)
+                ->resize(770,520)->save('upload/property/additional_images/'.$additionalImagesNameGen);
 
-                $multiImageUploadPath = 'upload/property/multi-image/'.$multiimgname_gen;
+                $multiImageUploadPath = 'upload/property/additional_images/'.$additionalImagesNameGen;
 
-                MultiImage::where('id',$id)->update([
+                AdditionalImages::where('id',$id)->update([
 
                     'photo_name' => $multiImageUploadPath,
                     'updated_at' => Carbon::now(),
@@ -253,12 +256,12 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function PropertyMultiImageDelete($id){
+    public function PropertyAdditionalImagesDelete($id){
 
-        $oldImg = MultiImage::findOrFail($id);
-        unlink($oldImg->photo_name);
+        $prevAdditionalImages = AdditionalImages::findOrFail($id);
+        unlink($prevAdditionalImages->photo_name);
 
-        MultiImage::findOrFail($id)->delete();
+        AdditionalImages::findOrFail($id)->delete();
 
         $notification = array(
             'message' => 'Property Multi Image Deleted Successfully',
@@ -268,53 +271,53 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function StoreNewMultiimage(Request $request){
-        $storeNewMultiImg = $request->imageid;
-        $image = $request->file('multi_img');
+    // public function StoreNewMultiimage(Request $request){
+    //     $storeNewMultiImg = $request->imageid;
+    //     $image = $request->file('additional_images');
 
-        if ($image) {
-            $manager = new ImageManager(new Driver());
-            $multiimgname_gen = hexdec(uniqid())
-            .'.'.$image->getClientOriginalExtension();
-            $image =  $manager->read($image)
-                ->resize(770,520)->save('upload/property/multi-image/'.$multiimgname_gen);
+    //     if ($image) {
+    //         $manager = new ImageManager(new Driver());
+    //         $multiimgname_gen = hexdec(uniqid())
+    //         .'.'.$image->getClientOriginalExtension();
+    //         $image =  $manager->read($image)
+    //             ->resize(770,520)->save('upload/property/additional_images/'.$multiimgname_gen);
 
-            $multiImageUploadPath = 'upload/property/multi-image/'.$multiimgname_gen;
+    //         $multiImageUploadPath = 'upload/property/additional_images/'.$multiimgname_gen;
 
-            MultiImage::insert([
-                'property_id' => $storeNewMultiImg,
-                'photo_name' => $multiImageUploadPath,
-                'created_at' => Carbon::now(),
-            ]);
-        }
+    //         MultiImage::insert([
+    //             'property_id' => $storeNewMultiImg,
+    //             'photo_name' => $multiImageUploadPath,
+    //             'created_at' => Carbon::now(),
+    //         ]);
+    //     }
 
 
-        $notification = array(
-            'message' => 'Property Multi Image Added Successfully',
-            'alert-type' => 'success'
-        );
+    //     $notification = array(
+    //         'message' => 'Property Multi Image Added Successfully',
+    //         'alert-type' => 'success'
+    //     );
 
-        return redirect()->back()->with($notification);
-    }
+    //     return redirect()->back()->with($notification);
+    // }
 
-    public function DeleteProperty($id){
-        $property = Property::findOrFail($id);
-        unlink($property->property_thambnail);
+    // public function DeleteProperty($id){
+    //     $property = Property::findOrFail($id);
+    //     unlink($property->property_mainimage);
 
-        Property::findOrFail($id)->delete();
+    //     Property::findOrFail($id)->delete();
 
-        $image = MultiImage::where('property_id',$id)->get();
+    //     $image = MultiImage::where('property_id',$id)->get();
 
-        foreach($image as $img){
-            unlink($img->photo_name);
-            MultiImage::where('property_id',$id)->delete();
-        }
+    //     foreach($image as $img){
+    //         unlink($img->photo_name);
+    //         MultiImage::where('property_id',$id)->delete();
+    //     }
 
-        $notification = array(
-            'message' => 'Property Deleted Successfully',
-            'alert-type' => 'success'
-        );
+    //     $notification = array(
+    //         'message' => 'Property Deleted Successfully',
+    //         'alert-type' => 'success'
+    //     );
 
-        return redirect()->back()->with($notification);
-    }
+    //     return redirect()->back()->with($notification);
+    // }
 }

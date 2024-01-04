@@ -195,7 +195,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Main Image</label>
                                     <div class="col-sm-12">
-                                        <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)" >
+                                        <input type="file" name="property_mainimage" class="form-control" onChange="mainThamUrl(this)" >
                                     </div>
                                     <div class="row" id="mainThmb"> </div>
                                 </div>
@@ -204,7 +204,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Additional Images</label>
                                     <div class="col-sm-12">
-                                        <input type="file" name="multi_img[]" class="form-control" id="multiImg" multiple="" >
+                                        <input type="file" name="additional_images[]" class="form-control" id="multiImg" multiple="" >
                                     </div>
                                     <div class="row" id="preview_img"> </div>
                                 </div>
