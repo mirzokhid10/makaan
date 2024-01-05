@@ -9,15 +9,15 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('all.type') }}">
                 <i class="mdi mdi-circle-outline menu-icon"></i>
-                <span class="menu-title">Property Type</span>
+                <span class="menu-title">AAll Property Types</span>
             </a>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('all.agent') }}">
                 <i class="mdi mdi-view-headline menu-icon"></i>
-                <span class="menu-title">All Agent</span>
+                <span class="menu-title">All Agents</span>
             </a>
-        </li> --}}
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('all.property')}}">
                 <i class="mdi mdi-view-headline menu-icon"></i>

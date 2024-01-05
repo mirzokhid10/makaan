@@ -125,8 +125,7 @@ class PropertyController extends Controller
         return view('backend.property.edit_property',
         compact('properties', 'propertytype', 'editAdditionalImages', 'additional_images'));
 
-    }
-    // End Method
+    } // End Method
 
     // UpdateType
     public function UpdateProperty(Request $request){

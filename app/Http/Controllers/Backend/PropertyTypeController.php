@@ -55,7 +55,6 @@ class PropertyTypeController extends Controller
         $pid = $request->id;
 
         PropertyType::findOrFail($pid)->update([
-
             'type_name' => $request->type_name,
             'type_icon' => $request->type_icon,
         ]);
