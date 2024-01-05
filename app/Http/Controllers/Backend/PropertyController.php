@@ -300,24 +300,37 @@ class PropertyController extends Controller
     //     return redirect()->back()->with($notification);
     // }
 
-    // public function DeleteProperty($id){
-    //     $property = Property::findOrFail($id);
-    //     unlink($property->property_mainimage);
+    public function DeleteProperty($id){
+        $delProperty = Property::findOrFail($id);
+        unlink($delProperty->property_mainimage);
 
-    //     Property::findOrFail($id)->delete();
+        Property::findOrFail($id)->delete();
 
-    //     $image = MultiImage::where('property_id',$id)->get();
+        $delAdditionalImages = AdditionalImages::where('property_id',$id)->get();
 
-    //     foreach($image as $img){
-    //         unlink($img->photo_name);
-    //         MultiImage::where('property_id',$id)->delete();
-    //     }
+        foreach($delAdditionalImages as $delAddImgs){
+            unlink($delAddImgs->photo_name);
+            AdditionalImages::where('property_id',$id)->delete();
+        }
 
-    //     $notification = array(
-    //         'message' => 'Property Deleted Successfully',
-    //         'alert-type' => 'success'
-    //     );
+        $notification = array(
+            'message' => 'Property Deleted Successfully',
+            'alert-type' => 'success'
+        );
 
-    //     return redirect()->back()->with($notification);
-    // }
+        return redirect()->back()->with($notification);
+    }
+
+    public function DetailsProperty($id){
+        $property = Property::findOrFail($id);
+
+        $additional_images = AdditionalImages::where('property_id',$id)->get();
+
+        $propertytype = PropertyType::latest()->get();
+
+        // $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
+
+        return view('backend.property.details_property',compact('property','propertytype','additional_images',));
+    }
+
 }

@@ -106,7 +106,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
         // Route::get('/property/property_mainimage/delete/{id}', 'PropertyThambnailDelete')->name('property.property_mainimage.delete');
         Route::post('/update/property/additional_images', 'UpdatePropertyAdditionalImages')->name('update.property.additional_images');
         Route::get('/property/multiimg/delete/{id}', 'PropertyAdditionalImagesDelete')->name('property.additional_images.delete');
-        // Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+        Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+        Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
 
     });
 

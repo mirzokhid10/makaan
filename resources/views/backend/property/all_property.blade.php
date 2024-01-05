@@ -23,11 +23,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if ($properties->isEmpty())
-                                    <tr>
-                                        <td colspan="12">Data not available</td>
-                                    </tr>
-                                @else --}}
                                 @foreach ($properties as $key => $property)
                                     <tr>
                                         <td class="py-1">
@@ -42,10 +37,12 @@
                                         <td>{{ $property->status }}</td>
                                         <td>{{ $property->lowest_price }}</td>
                                         <td>
+                                            <a href="{{ route('details.property',$property->id) }}"
+                                                class="btn btn-inverse-info" title="Details"> Details </a>
                                             <a href="{{ route('edit.property', $property->id) }}"
                                                 class="btn btn-inverse-warning"> Edit </a>
-                                            {{-- <a href="{{ route('delete.property', $property->id) }}"
-                                                class="btn btn-inverse-danger" id="delete"> Delete </a> --}}
+                                            <a href="{{ route('delete.property', $property->id) }}"
+                                                class="btn btn-inverse-danger" id="delete"> Delete </a>
                                         </td>
                                     </tr>
                                 @endforeach
