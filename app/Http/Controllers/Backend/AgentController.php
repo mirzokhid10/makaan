@@ -84,34 +84,45 @@ class AgentController extends Controller
 
         ]);
 
-        $updateAgentImage = $request->agentImageId;
-        $prevUpdateAgentImage = $request->prevAgentImage;
-
-        if ($request->file('agent_image')) {
-            $manager = new ImageManager(new Driver);
-            $updateAgentImageNameGen = hexdec(uniqid()).'.'.$request
-            ->file('agent_image')->getClientOriginalExtension();
-
-            $updateAgentImagePath = $manager->read($request->file('agent_image'))
-            ->resize(300, 300)->save('upload/property/main_image/'.$updateAgentImageNameGen);
-            $updateAgentImageSave = 'upload/property/main_image/'.$updateAgentImageNameGen;
-        }
-
-        if (file_exists($prevUpdateAgentImage)) {
-            unlink($prevUpdateAgentImage);
-        }
-
-        Agent::findOrFail($updateAgentImage)->update([
-            'agent_photo' => $updateAgentImageSave,
-            'updated_at' => Carbon::now(),
-        ]);
-
         $notification = array(
             'message' => 'Agent Updated Successfully',
             'alert-type' => 'success'
         );
 
         return redirect()->route('all.agent')->with($notification);
+    }
+
+    public function UpdateAgentPhoto(Request $request) {
+
+        $updateAgentPhotoId = $request->agentImageId;
+        $prevUpdateAgentPhoto = $request->prevAgentImage;
+
+        if ($request->file('agent_photo')) {
+            $manager = new ImageManager(new Driver());
+            $updateAgentPhotoNameGen = hexdec(uniqid()).'.'.$request
+            ->file('agent_photo')->getClientOriginalExtension();
+
+
+            $updateAgentPhotoResize = $manager->read($request->file('agent_photo'))
+            ->resize(370,246)->save('upload/property/main_image/'.$updateAgentPhotoNameGen);
+            $updateAgentPhotoSave = 'upload/agent_images/'.$updateAgentPhotoNameGen;
+        }
+
+        if (file_exists($updateAgentPhotoId)) {
+            unlink($prevUpdateAgentPhoto);
+        }
+
+        Agent::findOrFail($updateAgentPhotoId)->update([
+            'agent_photo' => $updateAgentPhotoSave,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Agent Image Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 
     // DeleteType

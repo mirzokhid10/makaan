@@ -217,7 +217,8 @@
                 {{-- Edit single image section --}}
                 <div class="card-body">
                     <h4 class="card-title">Edit Main Image</h4>
-                    <form method="post" action="{{ route('update.property.property_mainimage') }}" id="myForm" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('update.property.property_mainimage') }}"
+                    id="myForm" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="mainImageId" value="{{ $properties->id }}">
                         <input type="hidden" name="oldMainImage" value="{{ $properties->property_mainimage }}" >

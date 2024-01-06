@@ -7,8 +7,7 @@
                 <form method="post" action="{{ route('update.agent') }}"
                 enctype="multipart/form-data" class="form-sample" id="myForm">
                 <input type="hidden" name="id" value="{{ $editAgents->id }}">
-                <input type="hidden" name="agentImageId" value="{{ $editAgents->agent_id }}">
-                <input type="hidden" name="prevAgentImage" value="{{ $editAgents->agent_photo }}" >
+
                 @csrf
                     <p class="card-description">
                         Personal info
@@ -126,6 +125,18 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-12 ">
+                            <button type="submit" class="btn btn-primary px-4">Save Details</button>
+                        </div>
+                    </div>
+
+                </form>
+                <form method="post" action="{{route('update.agent.agent_photo')}}"
+                enctype="multipart/form-data" class="form-sample" id="myForm">
+                <input type="hidden" name="agentPhotoId" value="{{ $editAgents->agent_id }}">
+                <input type="hidden" name="prevAgentPhoto" value="{{ $editAgents->agent_photo }}" >
+                @csrf
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <table class="table table-striped">
@@ -134,7 +145,7 @@
                                             <th>Current Image</th>
                                             <th>Image Uploaded</th>
                                             <th>Select Image</th>
-                                            <th>Action</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,13 +161,12 @@
                                                 <input type="file" name="agent_photo" class="form-control"
                                                     onChange="mainThamUrl(this)">
                                             </td>
-                                            <td>
-                                                <button type="submit" class="btn btn-primary px-4">Save Details</button>
-                                            </td>
+                                            <td><button type="submit" class="btn btn-primary px-4">Save Agent Image</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                     </div>
                 </form>

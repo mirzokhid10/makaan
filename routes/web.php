@@ -118,6 +118,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::post('/store/agent', 'StoreAgent')->name('store.agent');
         Route::get('/edit/agent/{id}', 'EditAgent')->name('edit.agent');
         Route::post('/update/agent', 'UpdateAgent')->name('update.agent');
+        Route::post('/update/agent/agent_photo', 'UpdateAgentPhoto')
+        ->name('update.agent.agent_photo');
         Route::get('/delete/agent/{id}', 'DeleteAgent')->name('delete.agent');
     });
 
